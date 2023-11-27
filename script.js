@@ -337,7 +337,7 @@ function updateClock() {
     hours = hours % 12;
     hours = hours ? hours : 12; // The hour '0' should be '12' in AM/PM
 
-    var timeString = (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes + ' ' + ampm;
+    var timeString = (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes;
 
     clock.innerText = timeString;
 }
