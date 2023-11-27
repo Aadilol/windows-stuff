@@ -11,30 +11,78 @@ function startDrag(e) {
 }
 
 function makeWindowDraggable(windowElement) {
-    windowElement.addEventListener('mousedown', function (e) {
-        activeWindow = windowElement;
-        offsetX = e.clientX - activeWindow.getBoundingClientRect().left;
-        offsetY = e.clientY - activeWindow.getBoundingClientRect().top;
+    var offsetX, offsetY;
+    var isDragging = false;
+
+    windowElement.addEventListener('mousedown', startDrag);
+    windowElement.addEventListener('touchstart', startDragTouch);
+
+    function startDrag(e) {
+        e.preventDefault(); // Prevent default behavior to avoid text selection
+
+        offsetX = e.clientX - windowElement.getBoundingClientRect().left;
+        offsetY = e.clientY - windowElement.getBoundingClientRect().top;
+
+        isDragging = true;
 
         // Bring the window to the front when clicked
-        bringToFront(activeWindow);
-        activateWindow(activeWindow);
-    });
+        bringToFront(windowElement);
+        activateWindow(windowElement);
 
-    windowElement.addEventListener('mousemove', function (e) {
-        if (activeWindow) {
+        window.addEventListener('mousemove', drag);
+        window.addEventListener('mouseup', stopDrag);
+    }
+
+    function startDragTouch(e) {
+        e.preventDefault();
+
+        var touch = e.touches[0];
+        offsetX = touch.clientX - windowElement.getBoundingClientRect().left;
+        offsetY = touch.clientY - windowElement.getBoundingClientRect().top;
+
+        isDragging = true;
+
+        bringToFront(windowElement);
+        activateWindow(windowElement);
+
+        window.addEventListener('touchmove', dragTouch, { passive: false });
+        window.addEventListener('touchend', stopDragTouch);
+    }
+
+    function drag(e) {
+        if (isDragging) {
             var x = e.clientX - offsetX;
             var y = e.clientY - offsetY;
 
-            activeWindow.style.left = x + 'px';
-            activeWindow.style.top = y + 'px';
+            windowElement.style.left = x + 'px';
+            windowElement.style.top = y + 'px';
         }
-    });
+    }
 
-    windowElement.addEventListener('mouseup', function () {
-        activeWindow = null;
-    });
+    function dragTouch(e) {
+        if (isDragging) {
+            var touch = e.touches[0];
+            var x = touch.clientX - offsetX;
+            var y = touch.clientY - offsetY;
+
+            windowElement.style.left = x + 'px';
+            windowElement.style.top = y + 'px';
+        }
+    }
+
+    function stopDrag() {
+        isDragging = false;
+        window.removeEventListener('mousemove', drag);
+        window.removeEventListener('mouseup', stopDrag);
+    }
+
+    function stopDragTouch() {
+        isDragging = false;
+        window.removeEventListener('touchmove', dragTouch);
+        window.removeEventListener('touchend', stopDragTouch);
+    }
 }
+
 
 
 function activateWindow(windowElement) {
