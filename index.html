@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @font-face {
+            font-family: 'font';
+            src: url('Windows Regular.ttf') format('truetype');
+            /* Add other font properties as needed */
+        }
+    </style>
+    <title>Windows 95 Emulator</title>
+</head>
+<body>
+    <div id="desktop">
+        <!-- Folder Icons -->
+        <div class="folder-icon" ondblclick="openFolder('folderWindow1')">
+            <img src="https://win98icons.alexmeub.com/icons/png/directory_open_file_mydocs-4.png" alt="Folder Icon">
+            <div class="folder-name">New Folder</div>
+        </div>
+
+        <div class="folder-icon" ondblclick="openFolder('folderWindow2')">
+            <img src="https://win98icons.alexmeub.com/icons/png/directory_open_file_mydocs-4.png" alt="Folder Icon">
+            <div class="folder-name">New Folder(1)</div>
+        </div>
+
+        <div class="internet-icon">
+            <a href="https://www.etsy.com/ca/shop/StuffByAdi?ref=shop_sugg_market" target = "none" class="explorer-icon"><img src="https://win98icons.alexmeub.com/icons/png/html2_new-4.png"></a>
+            <div class="internet-name">Link.url</div>
+        </div>
+
+
+<!-- Folder Windows 1 -->
+        <div class="window" id="folderWindow1">
+            <div class="window-header">
+                <div class="toolbar">
+                    <span class="window-icon"><img src="165.ico"></span>
+                    <span class="window-title">New Folder</span>
+                    <div class="window-controls">
+                        <span class="window-control" onclick="minimizeWindow('folderWindow1')"> <img src="minimize.ico"></span>
+                        <span class="window-control" onclick="closeWindow('folderWindow1')"> <img src="exit.ico"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="window-content">
+                <img class="image-icon" src="image.ico" alt="Image Icon 1" data-folder="folderWindow1" data-image="desert eagle.png" onclick="openImageWindow('imageWindow1')">
+                <div class="image-name">deserteagle.png</div>
+
+                <img class="image-icon" src="image.ico" alt="Image Icon 2" data-folder="folderWindow1" data-image="the creator.png" onclick="openImageWindow('imageWindow1')">
+                <div class="image-name">thecreator.png</div>
+
+                <img class="image-icon" src="image.ico" alt="Image Icon 3" data-folder="folderWindow1" data-image="kingvamp.png" onclick="openImageWindow('imageWindow1')">
+                <div class="image-name">kingvamp.png</div>
+
+                <img class="image-icon" src="image.ico" alt="Image Icon 4" data-folder="folderWindow1" data-image="rekha.png" onclick="openImageWindow('imageWindow1')">
+                <div class="image-name">rekha.png</div>
+
+                <img class="image-icon" src="image.ico" alt="Image Icon 5" data-folder="folderWindow1" data-image="whitegun.png" onclick="openImageWindow('imageWindow1')">
+                <div class="image-name">whiteferrari.png</div>
+
+                <img class="image-icon" src="image.ico" alt="Image Icon 6" data-folder="folderWindow1" data-image="letsstarthere.png" onclick="openImageWindow('imageWindow1')">
+                <div class="image-name">:(failure:(.png</div>
+
+                <img class="image-icon" src="image.ico" alt="Image Icon 4" data-folder="folderWindow1" data-image="kanyewest.png" onclick="openImageWindow('imageWindow1')">
+                <div class="image-name">alleyeson.png</div>
+
+                <img class="image-icon" src="image.ico" alt="Image Icon 5" data-folder="folderWindow1" data-image="icansee.png" onclick="openImageWindow('imageWindow1')">
+                <div class="image-name">telekenesis.png</div>
+
+                <img class="image-icon" src="image.ico" alt="Image Icon 6" data-folder="folderWindow1" data-image="thesun.png" onclick="openImageWindow('imageWindow1')">
+                <div class="image-name">thesun.png</div>
+
+                <img class="image-icon" src="image.ico" alt="Image Icon 6" data-folder="folderWindow1" data-image="mohanlal.png" onclick="openImageWindow('imageWindow1')">
+                <div class="image-name">straightout.png</div>
+
+            </div>
+        </div>
+
+
+
+<!-- New window for displaying the image -->
+
+        <div class="imagewindow active" id="imageWindow1">
+            <div class="window-header">
+                <div class="toolbar">
+                    <span class="window-title">Image Viewer</span>
+                    <div class="window-controls">
+                        <span class="window-control" onclick="closeWindow('imageWindow1')"><img src="exit.ico"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="image-content">
+                <!-- Content for displaying the image -->
+                <img id="imageElement" src="">
+            </div>
+        </div>
+
+
+<!-- Folder 2 -->
+        <div class="window" id="folderWindow2">
+            <div class="window-header">
+                <div class="toolbar">
+                    <span class="window-icon"><img src="165.ico"></span>
+                    <span class="window-title">New Folder(1)</span>
+                    <div class="window-controls">
+                        <span class="window-control" onclick="minimizeWindow('folderWindow2')"><img src="minimize.ico"></span>
+                        <span class="window-control" onclick="closeWindow('folderWindow2')"><img src="exit.ico"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="window-content">
+                <!-- Video Icons -->
+                <div class="video-icon" onclick="openVideoWindow('videoWindow1', 'nikes.mp4')">
+                    <img class="video-preview" src="video.ico" alt="Video Icon 1">
+                    <div class="video-name">Video 1</div>
+                </div>
+
+                <!-- Add more video icons as needed -->
+
+            </div>
+        </div>
+
+        <!-- Video Viewer Window -->
+        <div class="videowindow" id="videoWindow1">
+            <div class="window-header">
+                <div class="toolbar">
+                    <span class="window-title">Video Viewer</span>
+                    <div class="window-controls">
+                        <span class="window-control" onclick="closeWindow('videoWindow1')"><img src="exit.ico"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="video-content">
+                <!-- Video Player -->
+                <video id="videoElement" controls></video>
+            </div>
+        </div>
+
+
+        <div id="taskbar">
+            <div id="taskbar-buttons" class="taskbar-buttons"></div>
+            <div id="clock"></div>
+        </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
