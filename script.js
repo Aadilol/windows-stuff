@@ -15,71 +15,54 @@ function makeWindowDraggable(windowElement) {
     var isDragging = false;
 
     windowElement.addEventListener('mousedown', startDrag);
-    windowElement.addEventListener('touchstart', startDragTouch);
+    windowElement.addEventListener('touchstart', startDrag);
 
     function startDrag(e) {
-        e.preventDefault(); // Prevent default behavior to avoid text selection
-
-        offsetX = e.clientX - windowElement.getBoundingClientRect().left;
-        offsetY = e.clientY - windowElement.getBoundingClientRect().top;
-
-        isDragging = true;
-
-        // Bring the window to the front when clicked
-        bringToFront(windowElement);
-        activateWindow(windowElement);
-
-        window.addEventListener('mousemove', drag);
-        window.addEventListener('mouseup', stopDrag);
-    }
-
-    function startDragTouch(e) {
         e.preventDefault();
 
-        var touch = e.touches[0];
-        offsetX = touch.clientX - windowElement.getBoundingClientRect().left;
-        offsetY = touch.clientY - windowElement.getBoundingClientRect().top;
-
         isDragging = true;
 
-        bringToFront(windowElement);
-        activateWindow(windowElement);
+        // Determine the initial offset
+        offsetX = e.clientX || e.touches[0].clientX;
+        offsetY = e.clientY || e.touches[0].clientY;
 
-        window.addEventListener('touchmove', dragTouch, { passive: false });
-        window.addEventListener('touchend', stopDragTouch);
+        // Bring the window to the front when clicked or touched
+        bringToFront(windowElement);
+
+        // Attach the drag and end event listeners
+        window.addEventListener('mousemove', drag);
+        window.addEventListener('touchmove', drag, { passive: false });
+        window.addEventListener('mouseup', endDrag);
+        window.addEventListener('touchend', endDrag);
     }
 
     function drag(e) {
-        if (isDragging) {
-            var x = e.clientX - offsetX;
-            var y = e.clientY - offsetY;
+        if (!isDragging) return;
 
-            windowElement.style.left = x + 'px';
-            windowElement.style.top = y + 'px';
-        }
+        // Calculate the new position
+        var x = e.clientX || e.touches[0].clientX;
+        var y = e.clientY || e.touches[0].clientY;
+
+        var deltaX = x - offsetX;
+        var deltaY = y - offsetY;
+
+        // Update the offset
+        offsetX = x;
+        offsetY = y;
+
+        // Update the window's position
+        windowElement.style.left = windowElement.offsetLeft + deltaX + 'px';
+        windowElement.style.top = windowElement.offsetTop + deltaY + 'px';
     }
 
-    function dragTouch(e) {
-        if (isDragging) {
-            var touch = e.touches[0];
-            var x = touch.clientX - offsetX;
-            var y = touch.clientY - offsetY;
-
-            windowElement.style.left = x + 'px';
-            windowElement.style.top = y + 'px';
-        }
-    }
-
-    function stopDrag() {
+    function endDrag() {
         isDragging = false;
+
+        // Remove the event listeners when dragging ends
         window.removeEventListener('mousemove', drag);
-        window.removeEventListener('mouseup', stopDrag);
-    }
-
-    function stopDragTouch() {
-        isDragging = false;
-        window.removeEventListener('touchmove', dragTouch);
-        window.removeEventListener('touchend', stopDragTouch);
+        window.removeEventListener('touchmove', drag);
+        window.removeEventListener('mouseup', endDrag);
+        window.removeEventListener('touchend', endDrag);
     }
 }
 
