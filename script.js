@@ -239,6 +239,26 @@ function openImageWindow(windowId) {
 
     // Bring the image window to the front
     bringToFront(imageWindow);
+    // Add touchstart event in addition to click for mobile devices
+    document.addEventListener('click', function (event) {
+        openImageWindowOnClick(event);
+    });
+
+    document.addEventListener('touchstart', function (event) {
+        openImageWindowOnClick(event);
+    });
+
+    function openImageWindowOnClick(event) {
+        var clickedWindow = event.target.closest('.window');
+        if (clickedWindow) {
+            bringToFront(clickedWindow);
+        }
+
+        var clickedImage = event.target.closest('.image-icon');
+        if (clickedImage) {
+            openImageWindow('imageWindow1');
+        }
+    }   
 }
 
 function openVideoWindow(windowId, videoPath) {
