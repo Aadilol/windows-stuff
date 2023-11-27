@@ -215,6 +215,14 @@ function openImageWindow(windowId) {
     imageWindow.style.left = centerX + 'px';
     imageWindow.style.top = centerY + 'px';
 
+    // Ensure the window stays within the bounds
+    var x = Math.max(0, Math.min(centerX, window.innerWidth - imageWindow.offsetWidth));
+    var y = Math.max(0, Math.min(centerY, window.innerHeight - imageWindow.offsetHeight));
+
+    // Set the window's position
+    imageWindow.style.left = x + 'px';
+    imageWindow.style.top = y + 'px';
+
     // Make the image window draggable
     makeWindowDraggable(imageWindow);
 
@@ -236,6 +244,17 @@ function openImageWindow(windowId) {
 function openVideoWindow(windowId, videoPath) {
     var videoWindow = document.getElementById(windowId);
     document.getElementById('desktop').appendChild(videoWindow);
+
+    var centerX = (window.innerWidth - videoWindow.offsetWidth) / 2;
+    var centerY = (window.innerHeight - videoWindow.offsetHeight) / 2;
+
+    // Ensure the window stays within the bounds
+    var x = Math.max(0, Math.min(centerX, window.innerWidth - videoWindow.offsetWidth));
+    var y = Math.max(0, Math.min(centerY, window.innerHeight - videoWindow.offsetHeight));
+
+    // Set the window's position
+    videoWindow.style.left = x + 'px';
+    videoWindow.style.top = y + 'px';
     makeWindowDraggable(videoWindow);
 
     videoWindow.style.left = '50px';
