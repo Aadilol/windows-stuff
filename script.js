@@ -266,8 +266,8 @@ function openVideoWindow(windowId, videoPath) {
         var videoHeight = videoElement.videoHeight;
 
         // Adjust the size as needed
-        var windowWidth = videoWidth * 0.6; // You can adjust this multiplier
-        var windowHeight = videoHeight * 0.6;
+        var windowWidth = videoWidth * 0.35; // You can adjust this multiplier
+        var windowHeight = videoHeight * 0.35;
 
         videoElement.style.width = windowWidth + 'px';
         videoElement.style.height = windowHeight + 'px';
