@@ -249,7 +249,7 @@ function openVideoWindow(windowId, videoPath) {
 
     var videoElement = document.getElementById('videoElement');
     videoElement.src = videoPath;
-    videoElement.play();
+    videoElement.autoplay = true;
 
     // Add event listener for the close button
     var closeButton = videoWindow.querySelector('.window-control');
