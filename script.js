@@ -202,7 +202,7 @@ function openImageWindow(windowId) {
 
     // Ensure the window stays within the bounds
     var x = Math.max(0, Math.min(centerX, window.innerWidth - imageWindow.offsetWidth)) ;
-    var y = Math.max(0, Math.min(centerY, window.innerHeight - imageWindow.offsetHeight)) - 150;
+    var y = Math.max(0, Math.min(centerY, window.innerHeight - imageWindow.offsetHeight)) - 50;
 
     // Set the window's position
     imageWindow.style.left = x + 'px';
