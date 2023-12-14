@@ -129,7 +129,7 @@ body {
 .window.active .toolbar,
 .imagewindow.active .toolbar,
 .videowindow.active .toolbar {
-    background: rgb(0,1,128);
+    /* background: rgb(0,1,128); */
     background: linear-gradient(160deg, rgba(0,1,128,1) 0%, rgba(8,65,167,1) 50%, rgba(16,129,206,1) 100%);
 }
 
@@ -141,10 +141,11 @@ body {
     color: white;
 }
 
-.window-icon {
+.window-icon{
     margin-top: 3px;
     padding-right: 4px;
 }
+
 
 .window-controls {
     padding-top: 2px;

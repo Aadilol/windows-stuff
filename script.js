@@ -84,44 +84,35 @@ function activateWindow(windowElement) {
 
 
 function openFolder(windowId) {
-    // Check if the folder is already open
-    if (activeWindows[windowId]) {
-        // If it's open and minimized, restore it
-        if (activeWindows[windowId].style.display === 'none') {
-            activeWindows[windowId].style.display = 'block';
-            bringToFront(activeWindows[windowId]);
-        } else {
-            // If it's open and active, minimize it
-            activeWindows[windowId].style.display = 'none';
-            addTaskbarButton(windowId);
-        }
+    var folderWindow = document.getElementById(windowId);
+
+    // Check if the folder window is currently visible
+    if (folderWindow.style.display === 'block') {
+        // If visible, minimize it and add taskbar button
+        folderWindow.style.display = 'none';
+        addTaskbarButton(windowId);
+        activeWindows[windowId] = null; // No active window
     } else {
-        // If it's not open, create a new instance
-        var folderWindow = document.getElementById(windowId);
+        // If not visible, show the window and bring it to the front
         folderWindow.style.display = 'block';
-
-        // Calculate random position within the window bounds
-        var maxX = window.innerWidth - folderWindow.offsetWidth;
-        var maxY = window.innerHeight - folderWindow.offsetHeight;
-
-        var randomX = Math.floor(Math.random() * maxX);
-        var randomY = Math.floor(Math.random() * maxY);
-
-        // Set the window's position
-        folderWindow.style.left = randomX + 'px';
-        folderWindow.style.top = randomY + 'px';
-
-        makeWindowDraggable(folderWindow);
-        activeWindows[windowId] = folderWindow;
+        bringToFront(folderWindow);
 
         // Check if the taskbar button already exists
         if (!document.getElementById(windowId + '-taskbar-button')) {
             addTaskbarButton(windowId); // Add a button to the taskbar
         }
 
-        bringToFront(folderWindow); // Bring the new instance to the foreground
+        // Set this window as the active window
+        activeWindows[windowId] = folderWindow;
+
+        // Make the window draggable
+        makeWindowDraggable(folderWindow);
     }
 }
+
+
+
+
 
 
 
@@ -191,7 +182,9 @@ function addTaskbarButton(windowId) {
 
 function openImageWindow(windowId) {
     var imageWindow = document.getElementById(windowId);
+    activeWindows[windowId] = imageWindow;
 
+    imageWindow.style.display = 'block';
     // Calculate center position
     var centerX = (window.innerWidth - imageWindow.offsetWidth) / 2;
     var centerY = (window.innerHeight - imageWindow.offsetHeight) / 2;
@@ -199,6 +192,7 @@ function openImageWindow(windowId) {
     // Set the window's position
     imageWindow.style.left = centerX + 'px';
     imageWindow.style.top = centerY + 'px';
+
 
     // Ensure the window stays within the bounds
     var x = Math.max(0, Math.min(centerX, window.innerWidth - imageWindow.offsetWidth)) - 25 ;
@@ -229,6 +223,7 @@ function openImageWindow(windowId) {
 
 function openVideoWindow(windowId, videoPath) {
     var videoWindow = document.getElementById(windowId);
+    activeWindows[windowId] = videoWindow;
     document.getElementById('desktop').appendChild(videoWindow);
     var centerX = (window.innerWidth - videoWindow.offsetWidth) / 2;
     var centerY = (window.innerHeight - videoWindow.offsetHeight) / 2;

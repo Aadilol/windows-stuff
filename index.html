@@ -17,12 +17,12 @@
 <body>
     <div id="desktop">
         <!-- Folder Icons -->
-        <div class="folder-icon" ondblclick="openFolder('folderWindow1')">
+        <div class="folder-icon" onclick="openFolder('folderWindow1')">
             <img src="https://win98icons.alexmeub.com/icons/png/directory_open_file_mydocs-4.png" alt="Folder Icon">
             <div class="folder-name">New Folder</div>
         </div>
 
-        <div class="folder-icon" ondblclick="openFolder('folderWindow2')">
+        <div class="folder-icon" onclick="openFolder('folderWindow2')">
             <img src="https://win98icons.alexmeub.com/icons/png/directory_open_file_mydocs-4.png" alt="Folder Icon">
             <div class="folder-name">New Folder(1)</div>
         </div>
@@ -80,6 +80,7 @@
         <div class="imagewindow active" id="imageWindow1">
             <div class="window-header">
                 <div class="toolbar">
+                    <span class="window-icon"><img src="imageicon.png"></span>
                     <span class="window-title">Image Viewer</span>
                     <div class="window-controls">
                         <span class="window-control" onclick="closeWindow('imageWindow1')"><img src="exit.ico"></span>
@@ -111,9 +112,14 @@
                     <div class="video-name">nikes.mp4</div>
                 </div>
 
-                <div class="video-icon" onclick="openVideoWindow('videoWindow1', 'findyourwings.mp4')">
+                <div class="video-icon" onclick="openVideoWindow('videoWindow1', 'wings.mp4')">
                     <img class="video-preview" src="video.ico" alt="Video Icon 1">
                     <div class="video-name">wings.mp4</div>
+                </div>
+
+                <div class="video-icon" onclick="openVideoWindow('videoWindow1', 'test.mp4')">
+                    <img class="video-preview" src="video.ico" alt="Video Icon 1">
+                    <div class="video-name">test.mp4</div>
                 </div>
 
                 <!-- Add more video icons as needed -->
@@ -126,6 +132,7 @@
         <div class="videowindow" id="videoWindow1">
             <div class="window-header">
                 <div class="toolbar">
+                    <span class="window-icon"><img src="videoicon.png"></span>
                     <span class="window-title">Video Viewer</span>
                     <div class="window-controls">
                         <span class="window-control" onclick="closeWindow('videoWindow1')"><img src="exit.ico"></span>
