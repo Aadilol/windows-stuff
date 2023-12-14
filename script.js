@@ -215,12 +215,23 @@ function openImageWindow(windowId) {
 
 }
 
+
 function openVideoWindow(windowId, videoPath) {
     var videoWindow = document.getElementById(windowId);
     activeWindows[windowId] = videoWindow;
     document.getElementById('desktop').appendChild(videoWindow);
+    var centerX = (window.innerWidth - videoWindow.offsetWidth) / 2;
+    var centerY = (window.innerHeight - videoWindow.offsetHeight) / 2;
 
-    // Set initial position (adjust as needed)
+    // Ensure the window stays within the bounds
+    var x = Math.max(0, Math.min(centerX, window.innerWidth - videoWindow.offsetWidth));
+    var y = Math.max(0, Math.min(centerY, window.innerHeight - videoWindow.offsetHeight));
+
+    // Set the window's position
+    videoWindow.style.left = x + 'px';
+    videoWindow.style.top = y + 'px';
+    makeWindowDraggable(videoWindow);
+
     videoWindow.style.left = '50px';
     videoWindow.style.top = '50px';
 
@@ -228,6 +239,15 @@ function openVideoWindow(windowId, videoPath) {
 
     var videoElement = document.getElementById('videoElement');
     videoElement.src = videoPath;
+    videoElement.autoplay = true;
+
+    // Add event listener for the close button
+    var closeButton = videoWindow.querySelector('.window-control');
+    closeButton.onclick = function () {
+        // Pause the video when the window is closed
+        videoElement.pause();
+        closeWindow(windowId);
+    }
 
     // Add an event listener for the loadedmetadata event
     videoElement.addEventListener('loadedmetadata', function () {
@@ -242,20 +262,9 @@ function openVideoWindow(windowId, videoPath) {
         videoElement.style.width = windowWidth + 'px';
         videoElement.style.height = windowHeight + 'px';
 
-        // Add event listener for the close button
-        var closeButton = videoWindow.querySelector('.window-control');
-        closeButton.onclick = function () {
-            // Pause the video when the window is closed
-            videoElement.pause();
-            closeWindow(windowId);
-        };
-
-        // Play the video after setting dimensions
-        videoElement.play();
-
-        // Bring the window to the front and activate it
         bringToFront(videoWindow);
         activateWindow(videoWindow);
+
     });
 }
 
