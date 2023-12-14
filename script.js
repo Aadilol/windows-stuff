@@ -110,12 +110,6 @@ function openFolder(windowId) {
     }
 }
 
-
-
-
-
-
-
 function closeWindow(windowId) {
     var windowElement = document.getElementById(windowId);
     windowElement.style.display = 'none';
@@ -244,7 +238,6 @@ function openVideoWindow(windowId, videoPath) {
 
     var videoElement = document.getElementById('videoElement');
     videoElement.src = videoPath;
-    videoElement.autoplay = true;
 
     // Add event listener for the close button
     var closeButton = videoWindow.querySelector('.window-control');
