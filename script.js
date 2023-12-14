@@ -261,7 +261,7 @@ function openVideoWindow(windowId, videoPath) {
 
         videoElement.style.width = windowWidth + 'px';
         videoElement.style.height = windowHeight + 'px';
-
+        videoElement.play();
         bringToFront(videoWindow);
         activateWindow(videoWindow);
 
