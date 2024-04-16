@@ -102,8 +102,8 @@ body {
     display: none;
     position: absolute;
     padding-bottom: 2px;
-    width: 330px;
-    height: 225px;
+    width: 360px;
+    height: 235px;
     background-color: #faf8f5;
     border: 4px solid #c0c0c0;
     border-radius: 5px;
@@ -175,7 +175,7 @@ body {
     display: none;
     position: absolute;
     width: 300px;
-    height: 395px;
+    height: 410px;
     background-color: #1a1a1a;
     border: 4px solid #c0c0c0;
     border-radius: 5px;
